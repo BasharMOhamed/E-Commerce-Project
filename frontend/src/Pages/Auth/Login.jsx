@@ -1,19 +1,20 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../../Components/Loader";
 import { useLoginMutation } from "../../redux/api/usersApiSlice";
 import { setCredentials } from "../../redux/features/auth/authSlice";
 import { toast } from "react-toastify";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [login, { isLoading }] = useLoginMutation();
+  const [login] = useLoginMutation();
 
   const { userInfo } = useSelector((state) => state.auth);
 
@@ -27,69 +28,110 @@ const Login = () => {
     }
   }, [navigate, redirect, userInfo]);
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
+  const submitHandler = async (values, { setSubmitting }) => {
     try {
-      const res = await login({ email, password }).unwrap();
-      console.log(res);
+      const res = await login({
+        email: values.email,
+        password: values.password,
+      }).unwrap();
       dispatch(setCredentials({ ...res }));
       navigate(redirect);
+      toast.success("Login Successfully");
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
+    setSubmitting(false);
+  };
+
+  const initialValues = {
+    email: "",
+    password: "",
+  };
+
+  const validate = (values) => {
+    const errors = {};
+
+    if (!values.email) {
+      errors.email = "Email is required";
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)) {
+      errors.email = "Invalid email address";
+    }
+
+    if (!values.password) {
+      errors.password = "Password is required";
+    } else if (values.password.length < 6) {
+      errors.password = "Password must be at least 6 characters long";
+    }
+
+    return errors;
   };
 
   return (
     <div>
-      <section className="pl-[10rem] flex flex-wrap">
-        <div className="mr-[4rem] mt-[5rem]">
+      <section className="pl-[8rem] flex flex">
+        <div className="mr-[4rem] mt-[5rem] w-[30rem]">
           <h1 className="text-2xl font-semibold mb-4">Sign In</h1>
+          <Formik
+            initialValues={initialValues}
+            validate={validate}
+            onSubmit={submitHandler}
+          >
+            {({ isSubmitting }) => (
+              <Form className="container w-[100%]">
+                <div className="my-[1rem]">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-white"
+                  >
+                    Email Address
+                  </label>
+                  <Field
+                    type="email"
+                    id="email"
+                    name="email"
+                    className="mt-1 p-2 border rounded w-full"
+                    placeholder="Enter email"
+                  />
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    className="text-red-500"
+                  />
+                </div>
 
-          <form onSubmit={submitHandler} className="container w-[40rem]">
-            <div className="my-[2rem]">
-              <label
-                htmlFor="email"
-                className="block text-sm font-medium text-white"
-              >
-                Email Address
-              </label>
-              <input
-                type="email"
-                id="email"
-                className="mt-1 p-2 border rounded w-full"
-                placeholder="Enter email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
+                <div className="mb-4">
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium text-white"
+                  >
+                    Password
+                  </label>
+                  <Field
+                    type="password"
+                    id="password"
+                    name="password"
+                    className="mt-1 p-2 border rounded w-full"
+                    placeholder="Enter password"
+                  />
+                  <ErrorMessage
+                    name="password"
+                    component="div"
+                    className="text-red-500"
+                  />
+                </div>
 
-            <div className="mb-4">
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-white"
-              >
-                Password
-              </label>
-              <input
-                type="password"
-                id="password"
-                className="mt-1 p-2 border rounded w-full"
-                placeholder="Enter password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
+                <button
+                  disabled={isSubmitting}
+                  type="submit"
+                  className="bg-pink-500 text-white px-4 py-2 rounded cursor-pointer my-[1rem]"
+                >
+                  {isSubmitting ? "Signing In..." : "Sign In"}
+                </button>
 
-            <button
-              disabled={isLoading}
-              type="submit"
-              className="bg-pink-500 text-white px-4 py-2 rounded cursor-pointer my-[1rem]"
-            >
-              {isLoading ? "Signing In..." : "Sign In"}
-            </button>
-
-            {isLoading && <Loader />}
-          </form>
+                {isSubmitting && <Loader />}
+              </Form>
+            )}
+          </Formik>
 
           <div className="mt-4">
             <p className="text-white">
@@ -106,7 +148,7 @@ const Login = () => {
         <img
           src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80"
           alt=""
-          className="h-[65rem] w-[59%] xl:block md:hidden sm:hidden rounded-lg"
+          className=" hidden max-h-full max-w-[52rem] xl:block md:hidden  rounded-lg"
         />
       </section>
     </div>
