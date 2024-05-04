@@ -59,8 +59,6 @@ const Register = () => {
 
     if (!values.password) {
       errors.password = "Password is required";
-    } else if (values.password.length < 6) {
-      errors.password = "Password must be at least 6 characters long";
     }
 
     if (!values.confirmPassword) {
@@ -193,7 +191,7 @@ const Register = () => {
       <img
         src="https://images.unsplash.com/photo-1576502200916-3808e07386a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2065&q=80"
         alt=""
-        className="max-h-full w-[59%] xl:block md:hidden sm:hidden rounded-lg"
+        className="hidden max-h-full max-w-[52rem] xl:block md:hidden  rounded-lg"
       />
     </section>
   );
