@@ -128,6 +128,7 @@ const Navigation = () => {
               <>
                 <li>
                   <Link
+                    onClick={toggleDropdown}
                     to="/admin/dashboard"
                     className="block px-4 py-2 hover:bg-gray-100"
                   >
@@ -137,6 +138,7 @@ const Navigation = () => {
 
                 <li>
                   <Link
+                    onClick={toggleDropdown}
                     to="/admin/productlist"
                     className="block px-4 py-2 hover:bg-gray-100"
                   >
@@ -145,6 +147,7 @@ const Navigation = () => {
                 </li>
                 <li>
                   <Link
+                    onClick={toggleDropdown}
                     to="/admin/categorylist"
                     className="block px-4 py-2 hover:bg-gray-100"
                   >
@@ -153,6 +156,7 @@ const Navigation = () => {
                 </li>
                 <li>
                   <Link
+                    onClick={toggleDropdown}
                     to="/admin/orderlist"
                     className="block px-4 py-2 hover:bg-gray-100"
                   >
@@ -161,6 +165,7 @@ const Navigation = () => {
                 </li>
                 <li>
                   <Link
+                    onClick={toggleDropdown}
                     to="/admin/userlist"
                     className="block px-4 py-2 hover:bg-gray-100"
                   >
@@ -170,14 +175,21 @@ const Navigation = () => {
               </>
             )}
             <li>
-              <Link to="/profile" className="block px-4 py-2 hover:bg-gray-100">
+              <Link
+                onClick={toggleDropdown}
+                to="/profile"
+                className="block px-4 py-2 hover:bg-gray-100"
+              >
                 Profile
               </Link>
             </li>
 
             <li>
               <button
-                onClick={logoutHandler}
+                onClick={() => {
+                  logoutHandler();
+                  toggleDropdown();
+                }}
                 className="block w-full px-4 py-2 text-left hover:bg-gray-100"
               >
                 Logout
