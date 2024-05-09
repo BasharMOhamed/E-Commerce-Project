@@ -15,11 +15,13 @@ import CategoryList from "./Pages/Admin/CategoryList.jsx";
 import ProductList from "./Pages/Admin/ProductList.jsx";
 import AllProduct from "./Pages/Admin/AllProduct.jsx";
 import ProductUpdate from "./Pages/Admin/ProductUpdate.jsx";
+import Home from "./Home.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route index={true} path="/" element={<Home />} />
 
       <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<Profile />} />
