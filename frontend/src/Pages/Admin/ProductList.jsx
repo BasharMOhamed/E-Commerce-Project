@@ -168,8 +168,10 @@ const ProductList = () => {
                           <select
                             placeholder="Choose Category"
                             className="p-4 mb-3 w-[30rem] border rounded-lg bg-[#101011] text-white"
+                            value={category}
                             onChange={(e) => setCategory(e.target.value)}
                           >
+                            <option key={1} value=""></option>
                             {categories?.map((c) => (
                               <option key={c._id} value={c._id}>
                                 {c.name}

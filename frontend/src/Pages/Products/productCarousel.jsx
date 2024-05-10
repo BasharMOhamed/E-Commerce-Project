@@ -35,7 +35,7 @@ const productCarousel = () => {
       ) : (
         <Slider
           {...settings}
-          className="xl:w-[50rem]  lg:w-[50rem] md:w-[56rem] sm:w-[40rem] sm:block"
+          className="xl:w-[50rem] lg:w-[50rem] md:w-[56rem] sm:w-[40rem] sm:block"
         >
           {products.map(
             ({
@@ -57,7 +57,7 @@ const productCarousel = () => {
                   alt={name}
                   className="w-full rounded-lg object-cover h-[30rem]"
                 />
-                <div className="flex justify-between w-[20rem]">
+                <div className="flex justify-between w-[30rem] mt-[2rem]">
                   <div className="one">
                     <h2>{name}</h2>
                     <p>$ {price}</p>
@@ -70,8 +70,8 @@ const productCarousel = () => {
                       <h1 className="flex items-center mb-6">
                         <FaStore className="mr-2 text-white" /> Brand :{brand}
                       </h1>
-                      <h1 className="flex items-center mb-6">
-                        <FaStore className="mr-2 text-white" /> Added:{" "}
+                      <h1 className="flex items-center mb-6 w-[10rem]">
+                        <FaClock className="mr-2 text-white" /> Added:{" "}
                         {moment(createdAt).fromNow()}
                       </h1>
                       <h1 className="flex items-center mb-6">
@@ -82,7 +82,7 @@ const productCarousel = () => {
 
                     <div className="two">
                       <h1 className="flex items-center mb-6 ml-20">
-                        <FaStore className="mr-2 text-white" /> Rating:{" "}
+                        <FaStar className="mr-2 text-white" /> Rating:{" "}
                         {Math.round(rating)}
                       </h1>
                       <h1 className="flex items-center mb-6 ml-20">

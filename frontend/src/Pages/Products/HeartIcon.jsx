@@ -13,7 +13,7 @@ import {
   getFavoritesFromLocalStorage,
 } from "../../uitils/localStore";
 
-const HeartIcon = (product) => {
+const HeartIcon = ({ product }) => {
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites) || [];
   const isFavorite = favorites.some((p) => p._id === product._id);
@@ -38,7 +38,7 @@ const HeartIcon = (product) => {
       className="absolute top-2 right-5 cursor-pointer"
     >
       {isFavorite ? (
-        <FaHeart className="text-pint-500"></FaHeart>
+        <FaHeart className="text-pink-500"></FaHeart>
       ) : (
         <FaRegHeart className="text-white"></FaRegHeart>
       )}

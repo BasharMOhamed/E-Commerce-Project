@@ -31,18 +31,28 @@ const ProductUpdate = () => {
   const [uploadProductImage] = useUploadProductImageMutation();
   const [updateProduct] = useUpdateProductMutation();
   const [deleteProduct] = useDeleteProductMutation();
-
   useEffect(() => {
     if (productData && productData._id) {
+      console.log(productData);
       setName(productData.name);
       setDescription(productData.description);
       setPrice(productData.price);
-      setCategory(productData.categories?._id);
-      setQuantity(productData.setQuantity);
+      setCategory(productData.category);
+      setStock(productData.countInStock);
+      setQuantity(productData.quantity);
       setBrand(productData.brand);
       setImage(productData.image);
     }
-  }, [productData]);
+  }, [
+    productData,
+    // productData.name,
+    // productData.description,
+    // productData.price,
+    // productData.categories?._id,
+    // productData.setQuantity,
+    // productData.brand,
+    // productData.image,
+  ]);
   const uploadFileHandler = async (e) => {
     const formData = new FormData();
     formData.append("image", e.target.files[0]);
@@ -72,10 +82,10 @@ const ProductUpdate = () => {
       formData.append("quantity", quantity);
       formData.append("brand", brand);
       formData.append("countInStock", stock);
-
+      console.log(formData);
       const data = await updateProduct({
         productId: params._id,
-        formData,
+        FormData: formData,
       });
 
       if (data.error) {
@@ -213,6 +223,7 @@ const ProductUpdate = () => {
                           <select
                             placeholder="Choose Category"
                             className="p-4 mb-3 w-[30rem] border rounded-lg bg-[#101011] text-white"
+                            value={category}
                             onChange={(e) => setCategory(e.target.value)}
                           >
                             {categories?.map((c) => (
