@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import {
   useCreateProductMutation,
@@ -21,10 +21,12 @@ import moment from "moment";
 import HeartIcon from "./HeartIcon";
 import Rating from "./Rating";
 import ProductTabs from "./ProductTabs";
+import { addToCart } from "../../redux/features/cart/cartSlice";
 
 const ProductDetails = () => {
   const { id: productId } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [qty, setQty] = useState(1);
   const [rating, setRating] = useState(0);
@@ -59,6 +61,11 @@ const ProductDetails = () => {
     }
   };
 
+  const addToCartHandler = () => {
+    dispatch(addToCart({ ...product, qty }));
+    navigate("/cart");
+  };
+
   return (
     <>
       <div>
@@ -91,7 +98,9 @@ const ProductDetails = () => {
               <p className="my-4 xl:w-[35rem] lg:w-[35rem] md:w-[30rem] text-[#B0B0B0]">
                 {product.description}
               </p>
-              <p className="text-5xl my-4 font-extrabold">${product.price}</p>
+              <p className="text-5xl my-4 font-extrabold">
+                EGP {product.price}
+              </p>
               <div className="flex items-center justify-between w-[20rem]">
                 <div className="one">
                   <h1 className="flex items-center mb-6">
@@ -151,7 +160,7 @@ const ProductDetails = () => {
               </div>
               <div className="btn-container">
                 <button
-                  //   onClick={addToCartHandler}
+                  onClick={addToCartHandler}
                   disabled={product.countInStock === 0}
                   className="bg-pink-500 text-white py-2 px-4 rounded-lg mt-4 md:mt-0"
                 >

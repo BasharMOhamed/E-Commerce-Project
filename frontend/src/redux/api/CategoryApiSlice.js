@@ -41,6 +41,10 @@ export const CategoryApiSlice = apiSlice.injectEndpoints({
       }),
       keepUnusedDataFor: 5,
     }),
+
+    fetchCategories: builder.query({
+      query: () => `${CATEGORIES_URL}/categories`,
+    }),
   }),
 });
 
@@ -50,4 +54,5 @@ export const {
   useGetAllGategoriesQuery,
   useGetCategoryQuery,
   useUpdateCategoryMutation,
+  useFetchCategoriesQuery,
 } = CategoryApiSlice;
