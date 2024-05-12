@@ -50,7 +50,7 @@ const PlaceOrder = () => {
           <Message>Your cart is empty</Message>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full border-collapse">
+            <table className="w-[60rem] ml-[auto] mr-[auto] border-collapse">
               <thead>
                 <tr>
                   <td className="px-1 py-2 text-left align-top">Image</td>
@@ -87,7 +87,7 @@ const PlaceOrder = () => {
           </div>
         )}
 
-        <div className="mt-8">
+        <div className="mt-8 xl:w-[90rem] sm:w-[17rem] ml-[5rem]">
           <h2 className="text-2xl font-semibold mb-5">Order Summary</h2>
           <div className="flex justify-between flex-wrap p-8 bg-[#181818]">
             <ul className="text-lg">

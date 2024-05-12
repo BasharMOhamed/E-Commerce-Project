@@ -8,7 +8,7 @@ import Loader from "../../Components/Loader";
 import {
   useDeliverOrderMutation,
   useGetOrderDetailsQuery,
- // useGetPaypalClientIdQuery,
+  // useGetPaypalClientIdQuery,
   usePayOrderMutation,
 } from "../../redux/api/orderApiSlice";
 
@@ -29,32 +29,32 @@ const Order = () => {
 
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
 
-//   const {
-//     data: paypal,
-//     isLoading: loadingPaPal,
-//     error: errorPayPal,
-//   } = useGetPaypalClientIdQuery();
+  //   const {
+  //     data: paypal,
+  //     isLoading: loadingPaPal,
+  //     error: errorPayPal,
+  //   } = useGetPaypalClientIdQuery();
 
-//   useEffect(() => {
-//     if (!errorPayPal && !loadingPaPal && paypal.clientId) {
-//       const loadingPaPalScript = async () => {
-//         paypalDispatch({
-//           type: "resetOptions",
-//           value: {
-//             "client-id": paypal.clientId,
-//             currency: "USD",
-//           },
-//         });
-//         paypalDispatch({ type: "setLoadingStatus", value: "pending" });
-//       };
+  //   useEffect(() => {
+  //     if (!errorPayPal && !loadingPaPal && paypal.clientId) {
+  //       const loadingPaPalScript = async () => {
+  //         paypalDispatch({
+  //           type: "resetOptions",
+  //           value: {
+  //             "client-id": paypal.clientId,
+  //             currency: "USD",
+  //           },
+  //         });
+  //         paypalDispatch({ type: "setLoadingStatus", value: "pending" });
+  //       };
 
-//       if (order && !order.isPaid) {
-//         if (!window.paypal) {
-//           loadingPaPalScript();
-//         }
-//       }
-//     }
-//   }, [errorPayPal, loadingPaPal, order, paypal, paypalDispatch]);
+  //       if (order && !order.isPaid) {
+  //         if (!window.paypal) {
+  //           loadingPaPalScript();
+  //         }
+  //       }
+  //     }
+  //   }, [errorPayPal, loadingPaPal, order, paypal, paypalDispatch]);
 
   function onApprove(data, actions) {
     return actions.order.capture().then(async function (details) {
@@ -92,7 +92,7 @@ const Order = () => {
   ) : error ? (
     <Messsage variant="danger">{error.data.message}</Messsage>
   ) : (
-    <div className="container flex flex-col ml-[10rem] md:flex-row">
+    <div className="flex flex-col gap-[2rem] ml-[5rem] md:flex-row">
       <div className="md:w-2/3 pr-4">
         <div className="border gray-300 mt-5 pb-4 mb-5">
           {order.orderItems.length === 0 ? (
@@ -139,7 +139,7 @@ const Order = () => {
         </div>
       </div>
 
-      <div className="md:w-1/3">
+      <div className="md:w-[25rem]">
         <div className="mt-5 border-gray-300 pb-4 mb-4">
           <h2 className="text-xl font-bold mb-2">Shipping</h2>
           <p className="mb-4 mt-4">

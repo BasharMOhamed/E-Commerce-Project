@@ -15,9 +15,10 @@ const Header = () => {
 
   return (
     <>
-      <div className="flex justify-around">
+      <div className="flex flex-raw">
         <div className="xl:block lg:hidden md:hidden:sm:hidden">
-          <div className="grid grid-cols-2">
+          <div className="flex flex-raw flex-wrap ml-[4rem] md:hidden lg:flex">
+            {/* grid grid-cols-2 */}
             {data.map((product) => (
               <div key={product._id}>
                 <SmallProduct product={product} />

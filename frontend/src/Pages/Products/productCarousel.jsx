@@ -27,7 +27,7 @@ const productCarousel = () => {
   };
 
   return (
-    <div className="mb-4 lg:block xl:block md:block">
+    <div className="mb-4 lg:block xl:block md:block mr-[2rem]">
       {isLoading ? null : error ? (
         <Message variant="danger ">
           {error?.data?.message || error.message}
@@ -35,7 +35,7 @@ const productCarousel = () => {
       ) : (
         <Slider
           {...settings}
-          className="xl:w-[50rem] lg:w-[50rem] md:w-[56rem] sm:w-[40rem] sm:block"
+          className="xl:w-[46rem] lg:w-[46rem] md:w-[45rem] md:ml-[5rem] lg:ml-[0] sm:w-[40rem] sm:block"
         >
           {products.map(
             ({
@@ -57,7 +57,7 @@ const productCarousel = () => {
                   alt={name}
                   className="w-full rounded-lg object-cover h-[30rem]"
                 />
-                <div className="flex justify-between w-[30rem] mt-[2rem]">
+                <div className="flex justify-between w-[46rem] mt-[2rem]">
                   <div className="one">
                     <h2>{name}</h2>
                     <p>EGP {price}</p>
@@ -65,7 +65,7 @@ const productCarousel = () => {
                     <p className="w-[25rem]">{description.substring(0, 170)}</p>
                   </div>
 
-                  <div className="flex justify-between w-[20rem]">
+                  <div className="flex justify-between w-full md:ml-[0rem] ml-[1rem]">
                     <div className="one">
                       <h1 className="flex items-center mb-6">
                         <FaStore className="mr-2 text-white" /> Brand :{brand}
@@ -81,15 +81,15 @@ const productCarousel = () => {
                     </div>
 
                     <div className="two">
-                      <h1 className="flex items-center mb-6 ml-20">
+                      <h1 className="flex items-center mb-6 ml-10">
                         <FaStar className="mr-2 text-white" /> Rating:{" "}
                         {Math.round(rating)}
                       </h1>
-                      <h1 className="flex items-center mb-6 ml-20">
+                      <h1 className="flex items-center mb-6 ml-10 w-[20rem]">
                         <FaShoppingCart className="mr-2 text-white" /> Quantity:{" "}
                         {quantity}
                       </h1>
-                      <h1 className="flex items-center mb-6 ml-20">
+                      <h1 className="flex items-center mb-6 ml-10">
                         <FaBox className="mr-2 text-white" /> In Stock:{" "}
                         {countInStock}
                       </h1>
