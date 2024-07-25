@@ -121,7 +121,7 @@ const AdminDashboard = () => {
 
             <p className="mt-5">All Orders</p>
             <h1 className="text-xl font-bold">
-              EGP {isLoading ? <Loader /> : orders?.totalOrders}
+              {isLoading ? <Loader /> : orders?.totalOrders}
             </h1>
           </div>
         </div>
